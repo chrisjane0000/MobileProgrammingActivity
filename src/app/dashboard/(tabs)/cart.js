@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const products = [
-  { id: '1', name: 'GINGER', price: 300.00,  },
-  { id: '2', name: 'GABON/SAMBONG', price: 50.00, },
-  { id: '3', name: 'OREGANO', price: 20.00, },
-  { id: '4', name: 'ALOE VERA', price: 75.00, },
-  { id: '5', name: 'CHILI', price: 10.00, },
+  { id: '1', name: 'GINGER', price: 300.00 },
+  { id: '2', name: 'GABON/SAMBONG', price: 50.00 },
+  { id: '3', name: 'OREGANO', price: 20.00 },
+  { id: '4', name: 'ALOE VERA', price: 75.00 },
+  { id: '5', name: 'CHILI', price: 10.00 },
 ];
 
 const Cart = () => {
@@ -32,7 +32,7 @@ const Cart = () => {
     <View style={styles.productCard}>
       <Image source={{ uri: item.image }} style={styles.productImage} />
       <Text style={styles.productName}>{item.name}</Text>
-      <Text style={styles.productPrice}>${item.price.toFixed(2)}</Text>
+      <Text style={styles.productPrice}>₱{item.price.toFixed(2)}</Text>
       <View style={styles.quantityControls}>
         <TouchableOpacity onPress={() => handleDecrease(item.id)} style={styles.controlButton}>
           <Text>-</Text>

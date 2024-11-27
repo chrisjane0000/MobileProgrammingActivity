@@ -4,7 +4,6 @@ import { Button } from 'react-native-paper';
 const MyButton = ({ text, action, mode, size }) => {
   let style = null;
 
-  // Adjusting the button size based on the 'size' prop
   switch (size) {
     case 'small':
       style = { ...btnStyle.buttonSmall };
@@ -26,9 +25,12 @@ const MyButton = ({ text, action, mode, size }) => {
       mode={mode}
       onPress={() => action()}
       style={{
-        backgroundColor: '#004225',  // Setting the background color
-        borderColor: 'black',        // Setting the border color to black
-        borderWidth: 2,              // Optional: Border width for the border color to be visible
+        backgroundColor: '#004225',
+        borderColor: 'green',
+        borderWidth: 2,
+      }}
+      labelStyle={{
+        color: 'white',
       }}
     >
       {text}

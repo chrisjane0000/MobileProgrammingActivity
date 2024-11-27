@@ -1,4 +1,4 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { useRouter } from 'expo-router';
 import { Image, StyleSheet, Text, View } from 'react-native';
@@ -29,12 +29,14 @@ export default function DrawerContent(props) {
                 </View>
                 <DrawerItemList {...props} />
                 <DrawerItem
-                    label="Logout"
-                    icon={({ color, size }) => (
-                        <MaterialCommunityIcons name="logout" color={color} size={size} />
+                    label={() => (
+                        <View style={styles.logoutContainer}>
+                            <AntDesign name="logout" size={24} color="black" />
+                            <Text style={styles.logoutLabel}>Logout</Text>
+                        </View>
                     )}
-                    labelStyle={styles.logoutLabel}
                     onPress={handleLogout}
+                    style={styles.logoutItem}
                 />
             </DrawerContentScrollView>
             <View style={[styles.footer, { paddingBottom: bottom + 20 }]}>
@@ -54,14 +56,24 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: 20,
-        paddingBottom: 20,
+        paddingBottom: 40,
     },
     logo: {
         alignSelf: 'center',
-        height: 150,
-        width: 150,
+        height: 280,
+        width: 260,
+        borderRadius: 130
+    },
+    logoutContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     logoutLabel: {
+        marginLeft: 10,
+        fontSize: 16,
+        color: '#004225',
+    },
+    logoutItem: {
         marginLeft: 10,
     },
     footer: {

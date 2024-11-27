@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { IconButton } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MyButton from '../components/MyButton';
 
@@ -23,46 +24,50 @@ const SignUpScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image
-        source={require('../../assets/HerbalXchange.png')}
-        style={styles.avatar}
-      />
+      <View style={styles.background}>
+        <View style={styles.greenStripeTop} />
+        <View style={styles.greenStripeBottom} />
+      </View>
 
-      <View style={styles.greenStripeTop} />
-      <View style={styles.greenStripeBottom} />
+      <View style={styles.card}>
+        <Image
+          source={require('../../assets/HerbalXchange.png')}
+          style={styles.avatar}
+        />
+        <Text style={styles.title}>Sign Up</Text>
+        <Text style={styles.subtitle}>Create a new account</Text>
 
-      <View style={styles.section}>
         <TextInput
           label={'Full Name'}
           placeholder="Full Name"
-          style={styles.textInput}
+          style={styles.input}
         />
         <TextInput
           label={'Email Address'}
           placeholder="Email Address"
-          style={styles.textInput}
+          style={styles.input}
           keyboardType="email-address"
         />
         <TextInput
           label={'Username'}
           placeholder="Username"
-          style={styles.textInput}
+          style={styles.input}
         />
+
         <View style={styles.passwordContainer}>
           <TextInput
             label={'Password'}
             secureTextEntry={!showPassword}
             placeholder="Password"
-            style={[styles.textInput, styles.passwordInput]}
+            style={[styles.input, styles.passwordInput]}
             value={password}
             onChangeText={(text) => setPassword(text)}
           />
-          <TouchableOpacity
+          <IconButton
+            icon={showPassword ? 'eye' : 'eye-off'}
             onPress={() => setShowPassword(!showPassword)}
             style={styles.eyeIcon}
-          >
-            <Text>{showPassword ? '🙈' : '👁️'}</Text>
-          </TouchableOpacity>
+          />
         </View>
 
         <View style={styles.passwordContainer}>
@@ -70,41 +75,28 @@ const SignUpScreen = () => {
             label={'Confirm Password'}
             secureTextEntry={!showConfirmPassword}
             placeholder="Confirm Password"
-            style={[styles.textInput, styles.passwordInput]}
+            style={[styles.input, styles.passwordInput]}
             value={confirmPassword}
             onChangeText={(text) => setConfirmPassword(text)}
           />
-          <TouchableOpacity
+          <IconButton
+            icon={showConfirmPassword ? 'eye' : 'eye-off'}
             onPress={() => setShowConfirmPassword(!showConfirmPassword)}
             style={styles.eyeIcon}
-          >
-            <Text>{showConfirmPassword ? '🙈' : '👁️'}</Text>
-          </TouchableOpacity>
+          />
         </View>
-      </View>
 
-      <View style={{ ...styles.section, marginTop: 40 }}>
-        <View style={{ margin: 5 }}>
-          <MyButton
-            text="Register"
-            action={handleSignUp}
-            mode="contained"
-            size="small"
-            style={{ backgroundColor: '#004225' }} // Set the background color here
-          />
-        </View>
-        <View style={{ margin: 5 }}>
-          <MyButton
-            text="Have Already Account? LogIn"
-            action={() => router.back()}
-            mode="contained"
-            size="small"
-            style={{ backgroundColor: '#004225',
-                borderColor: 'black', 
-                borderWidth: 2,
-             }} // Set the background color here
-          />
-        </View>
+        <MyButton
+          text="Register"
+          action={handleSignUp}
+          mode="contained"
+          size="small"
+          style={{ backgroundColor: '#004225' }}
+        />
+
+        <TouchableOpacity onPress={() => router.back()} style={styles.loginLink}>
+          <Text style={styles.loginText}>Already have an account? Log In</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -113,16 +105,16 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F5F5F5',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  avatar: {
-    width: 100,
-    height: 100,
-    marginTop: 20,
-    borderRadius: 50,
+  background: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#E5E5E5',
   },
-  
   greenStripeTop: {
     position: 'absolute',
     width: '150%',
@@ -141,19 +133,38 @@ const styles = StyleSheet.create({
     bottom: 180,
     left: '-25%',
   },
-  section: {
-    flex: 1,
-    width: '100%',
+  card: {
+    backgroundColor: 'white',
+    marginHorizontal: 20,
+    borderRadius: 20,
     padding: 20,
+    alignItems: 'center',
+    elevation: 5,
+    width: '90%',
+    maxWidth: 400,
   },
-  textInput: {
+  avatar: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+    borderRadius: 50,
+  },
+  title: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  subtitle: {
+    color: '#666',
+    marginBottom: 20,
+  },
+  input: {
     width: '100%',
+    marginVertical: 10,
     height: 45,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#CCC',
     paddingHorizontal: 10,
-    marginBottom: 15,
     backgroundColor: '#F9F9F9',
   },
   passwordContainer: {
@@ -162,12 +173,15 @@ const styles = StyleSheet.create({
     width: '100%',
     marginBottom: 15,
   },
-  passwordInput: {
-    flex: 1,
-  },
   eyeIcon: {
-    marginLeft: -30,
-    padding: 10,
+    marginLeft: -40,
+  },
+  loginLink: {
+    marginTop: 10,
+  },
+  loginText: {
+    color: '#004225',
+    fontWeight: 'bold',
   },
 });
 

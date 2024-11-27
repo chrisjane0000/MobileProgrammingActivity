@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import {
     Image,
     StyleSheet,
+    TouchableOpacity,
     View,
 } from 'react-native';
-import { Button, Text, TextInput } from 'react-native-paper'; // Importing from react-native-paper for modern UI
+import { Button, Text, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const LoginScreen = () => {
@@ -16,15 +17,13 @@ const LoginScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* Background Design */}
+
             <View style={styles.background}>
                 <View style={styles.greenStripeTop} />
                 <View style={styles.greenStripeBottom} />
             </View>
 
-            {/* Login Card */}
             <View style={styles.card}>
-                {/* Logo */}
                 <Image
                     source={require('../../assets/HerbalXchange.png')}
                     style={styles.avatar}
@@ -36,16 +35,24 @@ const LoginScreen = () => {
                     Sign in to continue.
                 </Text>
 
-                {/* Username Input */}
                 <TextInput
                     value={username}
                     onChangeText={text => setUsername(text)}
                     label="Username"
                     placeholder="Enter your username"
                     style={styles.input}
+                    theme={{
+                        colors: {
+                            primary: '#004225',
+                            text: 'black',
+                            placeholder: 'white',
+                            background: 'white',
+                            surface: 'white',
+                            error: 'red',
+                        },
+                    }}
                 />
 
-                {/* Password Input */}
                 <TextInput
                     value={password}
                     onChangeText={text => setPassword(text)}
@@ -54,9 +61,18 @@ const LoginScreen = () => {
                     secureTextEntry={!isShowPassword}
                     right={<TextInput.Icon icon={isShowPassword ? "eye" : "eye-off"} onPress={() => setIsShowPassword(!isShowPassword)} />}
                     style={styles.input}
+                    theme={{
+                        colors: {
+                            primary: '#004225',
+                            text: 'black',
+                            placeholder: 'white',
+                            background: 'white',
+                            surface: 'white',
+                            error: 'red',
+                        },
+                    }}
                 />
 
-                {/* Login Button */}
                 <Button
                     mode="contained"
                     onPress={() => router.replace('/dashboard')}
@@ -65,23 +81,24 @@ const LoginScreen = () => {
                     Log In
                 </Button>
 
-                {/* Forgot Password */}
                 <Button
                     mode="text"
                     onPress={() => router.push('/recover')}
                     style={styles.forgotPassword}
                 >
-                    Forgot Password?
+                    <Text style={styles.forgot}>Forgot Password?</Text>
                 </Button>
 
-                {/* Sign Up */}
-                <Button
+
+                <TouchableOpacity
                     mode="outlined"
                     onPress={() => router.push('/register')}
                     style={styles.signUp}
                 >
-                    Don't have an account? Sign Up
-                </Button>
+                    <Text style={styles.signUpText}>Don't have an account? </Text>
+                    <Text style={styles.signUpText1}>Sign Up</Text>
+                </TouchableOpacity>
+
             </View>
         </SafeAreaView>
     );
@@ -155,6 +172,16 @@ const styles = StyleSheet.create({
     signUp: {
         marginTop: 10,
         borderColor: '#004225',
+    },
+    signUpText: {
+        right: 30
+    },
+    signUpText1: {
+        fontSize: 15,
+        left: 125,
+        bottom: 21,
+        fontWeight: 'bold',
+        color: 'darkgreen'
     },
 });
 

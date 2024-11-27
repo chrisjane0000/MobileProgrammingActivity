@@ -3,7 +3,7 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 
 const DashboardLayout = () => {
-  return (
+    return (
     <Tabs
       screenOptions={{
         headerShown: false,
